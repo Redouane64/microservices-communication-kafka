@@ -1,6 +1,6 @@
 import { ClientProviderOptions, Transport } from '@nestjs/microservices';
 
-export const kafkaOrdersClientOptions: ClientProviderOptions = {
+export const ordersServiceClientOptions: ClientProviderOptions = {
   name: 'ORDERS_SERVICE',
   transport: Transport.KAFKA,
   options: {

@@ -1,0 +1,18 @@
+digraph Workflows {
+  graph [pad="0.25", nodesep="1.5", ranksep="1.2"]
+  splines="TRUE";
+
+  /* Entities */
+  Users [label="Users Service", shape="circle"]
+  Broker [label="Kafka Broker", shape="cylinder"]
+  Orders [label="Orders Service", shape="circle"]
+
+  
+  /* Relationships */
+  Users -> Broker[label="(1) publish to\ntopic get_order"]
+  Broker -> Users[label="(4) consume topic\nget_order.reply"]
+
+  Orders -> Broker[label="(3) publish to\nget_order.reply"]
+  Broker -> Orders[label="(2) consume\nget_order"]
+
+}

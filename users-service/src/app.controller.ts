@@ -1,10 +1,10 @@
 import { Controller, Get, Param, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { OrdersClientService } from './orders-client.service';
+import { OrdersServiceClient } from './orders/orders-service-client';
 
 @Controller()
 export class AppController {
-  constructor(private readonly ordersService: OrdersClientService) {
+  constructor(private readonly ordersService: OrdersServiceClient) {
     /* TODO: */
   }
 

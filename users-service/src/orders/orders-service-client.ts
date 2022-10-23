@@ -3,8 +3,8 @@ import { ClientKafka } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class OrdersClientService implements OnModuleInit {
-  private readonly logger = new Logger(OrdersClientService.name);
+export class OrdersServiceClient implements OnModuleInit {
+  private readonly logger = new Logger(OrdersServiceClient.name);
 
   constructor(
     @Inject('ORDERS_SERVICE')
