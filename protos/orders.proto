@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package orders;
+
+service OrdersService {
+  rpc getOrders(Empty) returns (OrdersResponse) {}
+}
+
+message Empty { }
+
+message Order {
+  int32 id = 1;
+  int32 created_at = 2;
+  repeated string items = 3;
+  string userId = 4;
+}
+
+message OrdersResponse {
+  repeated Order orders = 1;
+}

@@ -1,15 +1,12 @@
 import { ClientProviderOptions, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 export const ordersServiceClientOptions: ClientProviderOptions = {
   name: 'ORDERS_SERVICE',
-  transport: Transport.KAFKA,
+  transport: Transport.GRPC,
   options: {
-    client: {
-      clientId: 'orders',
-      brokers: ['localhost:9092'],
-    },
-    consumer: {
-      groupId: 'app-consumer',
-    },
+    package: 'orders',
+    protoPath: [join(__dirname, '../../../protos/orders.proto')],
+    url: 'localhost:25925',
   },
 };
