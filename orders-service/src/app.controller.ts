@@ -1,5 +1,10 @@
 import { Controller, Get, Logger, Res } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
+import {
+  Ctx,
+  KafkaContext,
+  MessagePattern,
+  Payload,
+} from '@nestjs/microservices';
 import { Response } from 'express';
 
 @Controller()
@@ -17,6 +22,12 @@ export class AppController {
         created_at: Date.now(),
       },
     ];
+  }
+
+  @MessagePattern('user.data')
+  onUserLoggedIn(@Payload() data: any, @Ctx() context: KafkaContext) {
+    this.logger.log(`executing user.logged-in event handler...`);
+    this.logger.log(JSON.stringify(data));
   }
 
   @Get()
