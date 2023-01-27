@@ -6,6 +6,6 @@ export const grpcOptions: MicroserviceOptions = {
   options: {
     package: 'orders',
     protoPath: [join(__dirname, '../../protos/orders.proto')],
-    url: 'localhost:25925',
+    url: 'localhost:4001',
   },
 };

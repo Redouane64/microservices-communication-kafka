@@ -4,6 +4,7 @@ package orders;
 
 service OrdersService {
   rpc getOrders(Empty) returns (OrdersResponse) {}
+  rpc createOrder(Empty) returns (Empty) {}
 }
 
 message Empty { }
