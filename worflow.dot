@@ -9,10 +9,10 @@ digraph Workflows {
 
   
   /* Relationships */
-  Users -> Broker[label="(1) publish to\ntopic get_order"]
-  Broker -> Users[label="(4) consume topic\nget_order.reply"]
+  Users -> Broker[label="(1) publish to\ntopic order.get"]
+  Broker -> Users[label="(4) consume topic\norder.get.reply"]
 
-  Orders -> Broker[label="(3) publish to\nget_order.reply"]
-  Broker -> Orders[label="(2) consume\nget_order"]
+  Orders -> Broker[label="(3) publish to\norder.get.reply"]
+  Broker -> Orders[label="(2) consume\norder.get"]
 
 }
