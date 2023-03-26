@@ -12,14 +12,12 @@ export class OrdersServiceClient implements OnModuleInit {
   ) {}
 
   onModuleInit() {
-    this.ordersClient.subscribeToResponseOf('get_orders');
+    this.ordersClient.subscribeToResponseOf('order.get');
   }
 
-  async getOrdersByUserId(userId: string) {
-    this.logger.log('fetching user orders...');
-
+  async getOrderById(id: string) {
     const reply = await firstValueFrom(
-      this.ordersClient.send('get_orders', { userId }),
+      this.ordersClient.send('order.get', { id }),
     );
 
     return reply;

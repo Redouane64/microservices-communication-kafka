@@ -2,6 +2,7 @@ version: "3"
 
 services:
   kafka:
+    container_name: kafka_microservices_comm
     image: lensesio/fast-data-dev
     network_mode: 'host'
 

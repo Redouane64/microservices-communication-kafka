@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Inject,
+  NotFoundException,
   Param,
   Post,
   Res,
@@ -22,24 +23,30 @@ export class AppController {
     /* TODO: */
   }
 
-  @Get(':id')
-  async getHello(
-    @Res() response: Response,
-    @Param('id') id: string,
-  ): Promise<Response> {
-    const reply = await this.ordersService.getOrdersByUserId(id);
-    return response.status(200).json(reply);
-  }
-
   @Post()
-  async send(@Body() data: any, @Res() response: Response) {
+  async checkout(@Body() data: any, @Res() response: Response) {
+    // assuming an order.created event is emitted after a checkout
+    // operation completes successfully.
     const reply = await firstValueFrom(
-      this.kafkaClient.emit<any, any>('user.data', {
-        event: 'user.login',
+      this.kafkaClient.emit<any, any>('order.created', {
+        event: 'order.create',
         data,
       }),
     );
 
-    return response.status(200).send();
+    return response.status(200).send(reply);
+  }
+
+  @Get(':id')
+  async get(@Param('id') id: any, @Res() response: Response) {
+    // a command is send via topic and response is returned from
+    // reply topic.
+    const data = await this.ordersService.getOrderById(id);
+
+    if (!data) {
+      throw new NotFoundException(`order does not exist`);
+    }
+
+    return response.status(200).send(data);
   }
 }
